@@ -1,0 +1,45 @@
+---
+title: "My First Leaflet Map"
+author: "Anucha Ananbenjapon"
+date: "13 Jun 2019"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+The source code is available at [GitHub](https://github.com/Anancha/Development-Data-Product-Week2). [Just click here!](https://github.com/Anancha/Development-Data-Product-Week2)
+
+## Proplem
+
+Create a web page using R Markdown that features a map created with Leaflet.
+
+Host your webpage on either GitHub Pages, RPubs, or NeoCities.
+
+Your webpage must contain the date that you created the document, and it must contain a map created with Leaflet. We would love to see you show off your creativity!
+
+## Solution
+
+Create a leaflet map object.
+```{r}
+library(leaflet)
+map <- leaflet() %>% addTiles()
+```
+
+Create a marker with a picture of True Digital Park and a link to its homepage.
+```{r}
+benrathPalaceIcon <- makeIcon(
+   iconUrl = "https://s3-ap-southeast-1.amazonaws.com/truedigitalparkbucket/images/Overall-TrueDigitalPark.jpg",
+   iconWidth = 30*408/255, iconHeight = 40,
+   iconAnchorX = 30*408/255/2, iconAnchorY = 30/2
+)
+```
+
+Add the marker to the map and display the map.
+```{r}
+TDPKPopup <- c("<a href= 'https://www.truedigitalpark.com/home' >True Digital Park Bangkok TH<br><img src='https://s3-ap-southeast-1.amazonaws.com/truedigitalparkbucket/images/Overall-TrueDigitalPark.jpg' width='210' height='132'  alt='True Digital Park' title='True Digital Park'></a>")
+map %>%
+   addTiles() %>%
+   addMarkers(lat=13.686008, lng=100.610995, popup = TDPKPopup)
+```
